@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="bootstrap-5.3.3-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bootstrap-5.3.3-dist/js/bootstrap.bundle.js">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&" />
+    <title>Document</title>
+    <style>
+        main{
+            height: fit-content;
+            width: 400px;
+        }
+        .picture{
+            width: 60%;
+            aspect-ratio: 1 / 1;
+            margin: auto;
+            overflow: hidden;
+        }
+        .btnDiv{
+            top: 45%;
+            width: 93%;
+            margin: auto;
+        }
+        img{
+            width: 100%;
+            height: 100%;
+        }
+        .myBlack{
+            color: black;
+        }
+        .logo{
+            width: 40%;
+            aspect-ratio: 1 / 0.24;
+            background-image: url(freelogo.png);
+            background-size: cover;
+        }
+        .lineThrough{
+            height: 5px;
+
+        }
+    </style>
+</head>
+<body>
+    <main class="rounded shadow p-3 m-auto position-relative">
+        <div class="logo m-auto mt-4"></div>
+        <div class="picture mt-5 shadow rounded">
+            <img src="" alt="">
+        </div>
+     <div class="btnDiv d-flex align-items-center justify-content-between position-absolute">
+        <button class="btn" onclick="previous()">
+            <span class="material-symbols-outlined fw-bolder text-dark">chevron_left</span>
+        </button>
+        <button class="btn" onclick="next()">
+            <span class="material-symbols-outlined fw-bolder text-dark">chevron_right</span>
+        </button>
+     </div>
+     <div class="reply w-75 m-auto mt-4"></div>
+     <div class="lineThrough w-100 bg-primary mt-5 rounded"></div>
+    </main>
+</body>
+</html>
+<script>
+    let userImages = document.querySelector('img')
+    let userOutput = document.querySelector('.reply')
+    let userImageArr = ["image1.jpeg" , "image2.jpeg" , "image3.jpg" , "image4.jpg" , "image6.jpg" , "malisky.jpg"]
+    let index = 0
+    let users = {
+        Alex: {
+            lastName: "Myers",
+            email: 'alex@alex.com',
+            skills: ['HTML', 'CSS', 'JavaScript'],
+            age: 20,
+            isLoggedIn: false,
+            points: 30
+        },
+        Asab: {
+            lastName: "Habibi",
+            email: 'asab@asab.com',
+            skills: ['HTML', 'CSS', 'JavaScript', 'Redux', 'MongoDB', 'Express', 'React', 'Node'],
+            age: 25,
+            isLoggedIn: false,
+            points: 50
+        },
+        Brook: {
+            lastName: "James",
+            email: 'brook@brook.com',
+            skills: ['HTML', 'CSS', 'JavaScript', 'React', 'Redux'],
+            age: 30,
+            isLoggedIn: true,
+            points: 50
+        },
+        Daniel: {
+            lastName: "Gandalf",
+            email: 'daniel@daniel.com',
+            skills: ['HTML', 'CSS', 'JavaScript', 'Python'],
+            age: 20,
+            isLoggedIn: false,
+            points: 40
+        },
+        John: {
+            lastName: "Lorem",
+            email: 'john@john.com',
+            skills: ['HTML', 'CSS', 'JavaScript', 'React', 'Redux', 'Node.js'],
+            age: 20,
+            isLoggedIn: true,
+            points: 50
+        },
+        Paul: {
+            lastName: "Ipsum",
+            email: 'paul@paul.com',
+            skills: ['HTML', 'CSS', 'JavaScript', 'MongoDB', 'Express', 'React', 'Node'],
+            age: 20,
+            isLoggedIn: false,
+            points: 40
+        }
+    }
+
+    let userName = Object.keys(users)
+    console.log(userName);
+    let userInfo = Object.values(users)
+    console.log(userInfo);
+    let userEmail = userInfo[index].email
+    console.log(userEmail);
+    
+    
+    
+    let changeDetails = () => {
+        userOutput.innerHTML = `
+        <h1 class="fw-bolder myBlack text-center">${userName[index].toUpperCase()}</h1>
+        <h3 class="myBlack text-center">${userInfo[index].lastName.toUpperCase()}</h3>
+        <p class="myBlack text-center">${userInfo[index].email}</p>
+        <h5 class="myBlack mt-4 text-center fw-bolder">${userInfo[index].skills.join(', ')}</h5>
+        <h3 class="myBlack mt-4 text-center fw-bolder">${userInfo[index].age} Years of Age</h3>
+        `
+    }
+
+    let changePics = () => {
+        userImages.src = userImageArr[index]
+    }
+
+    let next = () => {
+        if (index === userImageArr.length - 1) {
+            index = 0
+        } else {
+            index++
+        }
+        changePics()
+        changeDetails()
+    }
+
+    let previous = () => {
+        if (index === 0) {
+            index = userImageArr.length - 1
+        } else {
+            index--
+        }
+        changePics()
+        changeDetails()
+    }
+
+    document.addEventListener("DOMContentLoaded" , changePics)
+    document.addEventListener("DOMContentLoaded" , changeDetails)
+</script>
